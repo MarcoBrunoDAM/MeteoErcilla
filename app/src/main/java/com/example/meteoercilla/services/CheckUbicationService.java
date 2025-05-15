@@ -23,12 +23,10 @@ public class CheckUbicationService {
     private Context context;
     public CheckUbicationService(Context context) {
         this.context = context;
-        // 1. Prepara tu LocationRequest
         locationRequest = new LocationRequest.Builder(Priority.PRIORITY_HIGH_ACCURACY, 10_000)
                 .setMinUpdateIntervalMillis(5_000)
                 .build();
 
-        // 2. Crea el client
         settingsClient = LocationServices.getSettingsClient(context);
     }
 
