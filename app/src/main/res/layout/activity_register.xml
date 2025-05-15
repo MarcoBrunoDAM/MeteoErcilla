@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAE6FF"
+    tools:context=".RegisterActivity">
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/register_menu_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@android:color/black"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="login_background.json"
+        app:lottie_loop="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <TextView
+        android:id="@+id/viewUsuarios2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/registro_telefono"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.524"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_correo" />
+
+    <TextView
+        android:id="@+id/tx_tituloRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="REGISTRO"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/viewNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/registro_nombre"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.252"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloRegistro" />
+
+    <TextView
+        android:id="@+id/viewContrasena"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/registro_contrasena"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_telefono" />
+
+    <TextView
+        android:id="@+id/tx_tituloProvincias"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/registro_elegir_provincias"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_password" />
+
+    <TextView
+        android:id="@+id/viewRepeatPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/registro_repetir_contrasena"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.799"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_telefono" />
+
+    <TextView
+        android:id="@+id/viewUsuarios"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/registro_correo"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_nombre" />
+
+    <TextView
+        android:id="@+id/viewApellidos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/registro_apellidos"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.747"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloRegistro" />
+
+    <EditText
+        android:id="@+id/tx_nombre"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="@string/registro_nombre"
+        android:inputType="text"
+        android:shadowColor="#47B7DE"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHighlight="#FF9800"
+        android:textColorHint="#9E000000"
+        android:textColorLink="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewNombre" />
+
+    <EditText
+        android:id="@+id/tx_correo"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="@string/registro_introducir_correo"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHighlight="#FF9800"
+        android:textColorHint="#9E000000"
+        android:textColorLink="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewUsuarios" />
+
+    <EditText
+        android:id="@+id/tx_apellido"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="45dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="@string/registro_apellidos"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHighlight="#FF9800"
+        android:textColorHint="#9E000000"
+        android:textColorLink="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tx_nombre"
+        app:layout_constraintTop_toBottomOf="@+id/viewApellidos" />
+
+    <EditText
+        android:id="@+id/tx_password"
+        android:layout_width="145dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="@string/registro_contrasena"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHighlight="#FF9800"
+        android:textColorHint="#9E000000"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewContrasena" />
+
+    <EditText
+        android:id="@+id/tx_RepeatPassword"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="@string/registro_repetir_contrasena"
+        android:inputType="textPassword"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHighlight="#FF9800"
+        android:textColorHint="#9E000000"
+        app:layout_constraintStart_toEndOf="@+id/tx_password"
+        app:layout_constraintTop_toBottomOf="@+id/viewRepeatPassword" />
+
+    <Button
+        android:id="@+id/btn_registrarUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="120dp"
+        android:onClick="registrarUsuario"
+        android:text="REGISTRAR"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_provincias" />
+
+    <EditText
+        android:id="@+id/tx_telefono"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="@color/white"
+        android:ems="10"
+        android:hint="@string/registro_telefono"
+        android:inputType="phone"
+        android:textAlignment="center"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewUsuarios2" />
+
+    <Spinner
+        android:id="@+id/sp_provincias"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="#F8F8F8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloProvincias" />
+</androidx.constraintlayout.widget.ConstraintLayout>

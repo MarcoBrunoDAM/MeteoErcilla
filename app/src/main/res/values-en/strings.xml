@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MeteoErcilla</string>
+    <string name="registro_nombre">Name</string>
+    <string name="registro_apellidos">Surname</string>
+    <string name="registro_correo">Email</string>
+    <string name="registro_introducir_correo">Email</string>
+    <string name="registro_contrasena">Password</string>
+    <string name="registro_telefono">Phone</string>
+    <string name="registro_repetir_contrasena">Repeat the password</string>
+    <string name="registro_elegir_provincias">Choose your provinces</string>
+    <string name="iniciar_sesion">LOGIN</string>
+    <string name="busqueda_fechas">Date range</string>
+    <string name="desde">From</string>
+    <string name="hasta">To</string>
+    <string name="busqueda_provincias">Provinces</string>
+    <string name="busqueda_nivel_peligro">Danger level</string>
+    <string name="busqueda_tipo_alerta">Type of alert</string>
+    <string name="alerta_notificacion">⚠️ Weather alert</string>
+    <string name="busqueda_alertas">Alerts search</string>
+    <string name="buscar">Search</string>
+    <string name="menu_titulo">MAIN MENU</string>
+    <string name="menu_buscar">SEARCH</string>
+    <string name="menu_editar">EDIT</string>ç
+    <string name="menu_logout">LOGOUT</string>
+    <string name="resultados_ubicacion">Ubication</string>
+    <string name="resultados_provincia">Province</string>
+    <string name="resultados_fecha">Date</string>
+    <string name="resultados_nivel_peligro">Danger level</string>
+    <string name="nivel_leve">Mild</string>
+    <string name="nivel_moderado">Moderated</string>
+    <string name="nivel_importante">Important</string>
+    <string name="nivel_grave">Serious</string>
+    <string name="nivel_extremo">Extreme</string>
+    <string name="derrumbamientos">Landslides</string>
+    <string name="lluvias_tormentas">Rain and storm</string>
+    <string name="granizo">Hail</string>
+    <string name="nieve">Snow</string>
+    <string name="viento">Wind</string>
+    <string name="precaucion">Caution is recommended</string>
+    <string name="notificaciones_por">for</string>
+    <string name="alerta_en">Alerta in:</string>
+</resources>

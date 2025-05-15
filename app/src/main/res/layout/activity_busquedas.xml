@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#BAE6FF"
+    tools:context=".BusquedasActivity">
+
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/search_menu_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:background="@android:color/black"
+        app:lottie_autoPlay="true"
+        app:lottie_fileName="login_background.json"
+        app:lottie_loop="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/tx_tituloNivelPeligroBusqueda2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/busqueda_tipo_alerta"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_nivelPeligro" />
+
+    <TextView
+        android:id="@+id/tx_tituloNivelPeligroBusqueda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/busqueda_nivel_peligro"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.467"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_fechaDesde" />
+
+    <Spinner
+        android:id="@+id/sp_nivelPeligro"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="#F8F8F8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloNivelPeligroBusqueda" />
+
+    <Spinner
+        android:id="@+id/sp_tipoAlerta"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="#F8F8F8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloNivelPeligroBusqueda2" />
+
+    <TextView
+        android:id="@+id/tx_tituloProvinciasBusqueda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/registro_elegir_provincias"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloBusquedas" />
+
+    <TextView
+        android:id="@+id/tx_tituloFechaBusqueda"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="26dp"
+        android:text="@string/busqueda_fechas"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_provinciasBusqueda" />
+
+    <Spinner
+        android:id="@+id/sp_provinciasBusqueda"
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="#F8F8F8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloProvinciasBusqueda" />
+
+    <EditText
+        android:id="@+id/tx_fechaDesde"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="#03A8FF"
+        android:clickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/desde"
+        android:inputType="date"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloFechaBusqueda" />
+
+    <EditText
+        android:id="@+id/tx_fechaHasta"
+        android:layout_width="170dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_edit_text"
+        android:backgroundTint="#03A8FF"
+        android:clickable="true"
+        android:ems="10"
+        android:focusable="false"
+        android:hint="@string/hasta"
+        android:inputType="date"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tx_tituloFechaBusqueda" />
+
+    <Button
+        android:id="@+id/btn_buscarAlertas"
+        android:layout_width="255dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="30dp"
+        android:backgroundTint="#03A8FF"
+        android:onClick="buscarAlertas"
+        android:text="@string/menu_buscar"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sp_tipoAlerta" />
+
+    <TextView
+        android:id="@+id/tx_tituloBusquedas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="BUSQUEDA DE ALERTAS"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
