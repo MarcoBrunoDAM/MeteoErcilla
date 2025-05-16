@@ -39,4 +39,5 @@
     <string name="precaucion">Se recomienda precaucion</string>
     <string name="notificaciones_por">por</string>
     <string name="alerta_en">Alerta en:</string>
+    <string name="error_conexion">Error de conexion intentalo de nuevo mas tarde</string>
 </resources>

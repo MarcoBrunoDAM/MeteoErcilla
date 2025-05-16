@@ -158,7 +158,7 @@ DateTimeFormatter formatoSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             tiposAlerta = usuariosDAO.getTiposAlerta();
         } catch (SQLException e) {
             Intent intent = new Intent(this,MenuActivity.class);
-            Toast.makeText(this,"ERROR EN BASE DE DATOS",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.error_conexion,Toast.LENGTH_SHORT).show();
             startActivity(intent);
         }
         provinciasSpinner = new ArrayList<>();
