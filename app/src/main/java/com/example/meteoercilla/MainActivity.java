@@ -52,6 +52,8 @@ private LocationRequest locationRequest;
 private SettingsClient settingsClient;
 private Context context;
 private CheckUbicationService checkUbicationService;
+//Esta variable existe para evitar problemas de bucles a la hora de solicitar permisos
+int contadorPermisos = 0;
 Button btn_login, btn_registrar;
 UsuariosDAO usuariosDAO = new UsuariosDAO();
 //Estas 3 variables las usaremos para obtener la latitud y longitud de nuestra ubicacion
@@ -69,6 +71,8 @@ UsuariosDAO usuariosDAO = new UsuariosDAO();
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         btn_login = findViewById(R.id.btn_login);
         btn_registrar = findViewById(R.id.btn_registro);
+        //Esta variable esta para evitar problemas de bucles a la hora de solicitar permisos.
+        int contadorPermisos = 0;
         try{
             Connection connection = SQLDatabaseManagerRemota.connect();
             if(connection != null){
@@ -99,7 +103,6 @@ UsuariosDAO usuariosDAO = new UsuariosDAO();
 //            smsManager.sendTextMessage("+34643406362", "Meteoercilla", "Hola desde tu app!", null, null);
             SharedPreferences sharedPreferences = getSharedPreferences("Alertas",Context.MODE_PRIVATE);
             String alertas = sharedPreferences.getString("alertas",null);
-            Toast.makeText(this,"Alertas: " +alertas,Toast.LENGTH_SHORT).show();
         }
 
 
@@ -112,10 +115,19 @@ UsuariosDAO usuariosDAO = new UsuariosDAO();
 
     protected void onResume(){
         super.onResume();
+        //Con esto evitamos que se formen bucles si le damos a NO PERMITIR
         //Solicitamos los permisos en caso de que no los tengamos
-        NotifyPermissions.NotifyPermission(this);
-        UbicationPermission.UbicationPermission(this);
-    }
+        if(contadorPermisos == 0) {
+            UbicationPermission.UbicationPermission(this);
+            contadorPermisos++;
+        }
+        if (contadorPermisos <= 2) {
+            NotifyPermissions.NotifyPermission(this);
+            contadorPermisos++;
+        }
+        }
+
+
 
     public void login (View view){
         Intent intent = new Intent(this,LoginActivity.class);

@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -36,12 +38,14 @@ public class MenuActivity extends AppCompatActivity {
     private static final int REQUEST_CHECK_SETTINGS = 1001;
     private LocationRequest locationRequest;
     private SettingsClient settingsClient;
+    int contadorPermisos = 0;
     private Context context;
     private CheckUbicationService checkUbicationService;
     String ultimaUbicacion;
     int id_usuario;
     int userId;
-    Button btn_buscar , btn_editar , btn_logout;
+    Button btn_buscar, btn_editar, btn_logout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,68 +64,74 @@ public class MenuActivity extends AppCompatActivity {
         btn_buscar = findViewById(R.id.btn_buscarActivity);
         btn_editar = findViewById(R.id.btn_editarDatos);
         btn_logout = findViewById(R.id.btn_logout);
-       chekActivatedUbication();
+        chekActivatedUbication();
     }
 
 
     @Override
     protected void onResume() {
         super.onResume();
+
+        //Con esto evitamos que se formen bucles si le damos a NO PERMITIR
         //Solicitamos los permisos en caso de que no los tengamos al igual que en el main activity
         // en el caso que pasemos directamente al menu por el login automatico
-        NotifyPermissions.NotifyPermission(this);
-        UbicationPermission.UbicationPermission(this);
+        if(contadorPermisos == 0) {
+            UbicationPermission.UbicationPermission(this);
+            contadorPermisos++;
+        }
+        if (contadorPermisos <= 2) {
+            NotifyPermissions.NotifyPermission(this);
+            contadorPermisos++;
+        }
     }
 
 
-    protected void onStart(){
+    protected void onStart() {
         super.onStart();
-        id_usuario = getIntent().getIntExtra("id_usuario",0);
-        if(getIntent().getStringExtra("userID") != null){
+        id_usuario = getIntent().getIntExtra("id_usuario", 0);
+        if (getIntent().getStringExtra("userID") != null) {
             userId = Integer.valueOf(getIntent().getStringExtra("userID"));
-            Toast.makeText(this,"Inicio automatico: " +userId ,Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Inicio automatico: " + userId, Toast.LENGTH_SHORT).show();
         }
         ultimaUbicacion = obtenerUltimaUbicacion();
         //ejecutarServicioAlertas(this);
-        if (ultimaUbicacion != null){
-            Toast.makeText(this,"Ultima ubicacion conocida: " +ultimaUbicacion,Toast.LENGTH_SHORT).show();
-        }
-        else{
-            Toast.makeText(this,"No hay ubicacion",Toast.LENGTH_SHORT).show();
+        if (ultimaUbicacion != null) {
+            Toast.makeText(this, "Ultima ubicacion conocida: " + ultimaUbicacion, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "No hay ubicacion", Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void activityBusqueda(View view){
-        Intent intent = new Intent(this,BusquedasActivity.class);
+    public void activityBusqueda(View view) {
+        Intent intent = new Intent(this, BusquedasActivity.class);
         startActivity(intent);
     }
 
-    public void activityEditar(View view){
-        Intent intent = new Intent(this,EditarDatosActivity.class);
-        intent.putExtra("id_usuario",userId);
+    public void activityEditar(View view) {
+        Intent intent = new Intent(this, EditarDatosActivity.class);
+        intent.putExtra("id_usuario", userId);
         startActivity(intent);
     }
 
 
-
-    public void logout(View view){
+    public void logout(View view) {
         SharedPreferences sharedPreferences = getSharedPreferences("Sesion", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.clear();
         editor.apply();
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     //Esto mira el sharedpreferences y devuelve la ultima ubicacion guardada
-    public String obtenerUltimaUbicacion(){
-        SharedPreferences sharedPreferences = getSharedPreferences("Ubicacion",Context.MODE_PRIVATE);
-        String ubicacion = sharedPreferences.getString("ultimaUbicacion",null);
+    public String obtenerUltimaUbicacion() {
+        SharedPreferences sharedPreferences = getSharedPreferences("Ubicacion", Context.MODE_PRIVATE);
+        String ubicacion = sharedPreferences.getString("ultimaUbicacion", null);
         return ubicacion;
     }
 
 
-    public void obtenerUbicacion(){
+    public void obtenerUbicacion() {
         ObtenerUbicacionService ubicacionService = new ObtenerUbicacionService(this);
     }
 
@@ -135,7 +145,7 @@ public class MenuActivity extends AppCompatActivity {
         Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(locationSettingsRequest);
 
         task.addOnSuccessListener(this, response -> {
-            Toast.makeText(this,"GPS ACTIVADO",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "GPS ACTIVADO", Toast.LENGTH_SHORT).show();
             obtenerUbicacion();
         });
 
@@ -143,7 +153,7 @@ public class MenuActivity extends AppCompatActivity {
             if (e instanceof ResolvableApiException) {
                 try {
                     // Muestra el diálogo estándar de Google Play Services
-                    Toast.makeText(this,"DEBES ACTIVAR EL GPS",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "DEBES ACTIVAR EL GPS", Toast.LENGTH_SHORT).show();
                     ((ResolvableApiException) e)
                             .startResolutionForResult(this, REQUEST_CHECK_SETTINGS);
                 } catch (IntentSender.SendIntentException sendEx) {
