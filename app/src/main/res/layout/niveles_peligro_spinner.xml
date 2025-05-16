@@ -14,7 +14,7 @@
         android:paddingEnd="8dp" />
 
     <TextView
-        android:id="@+id/tx_tipoAlerta"
+        android:id="@+id/tx_nivelPeligro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="16sp"

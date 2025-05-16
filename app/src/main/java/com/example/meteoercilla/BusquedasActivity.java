@@ -166,12 +166,51 @@ DateTimeFormatter formatoSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
             Provincia provincia = new Provincia(p, false);
             provinciasSpinner.add(provincia);
         }
+        //Realizamos la traduccion de los niveles de peligro aqui ya que estos adapters no reciben contexto
+        //por lo que no podemos acceder a los elementos de string.xml por lo que le pasaremos
+        //al adapter los elementos ya traducidos, obviamente si son en español se van a quedar igual.
         for (String n : nivelesPeligro) {
             NivelPeligro nivelPeligro = new NivelPeligro(n,false);
+            switch (nivelPeligro.getNombre()) {
+                case "Leve":
+                   nivelPeligro.setNombre(getString(R.string.nivel_leve));
+                    break;
+                case "Moderado":
+                    nivelPeligro.setNombre(getString(R.string.nivel_moderado));
+                    break;
+                case "Importante":
+                    nivelPeligro.setNombre(getString(R.string.nivel_importante));
+                    break;
+                case "Grave":
+                    nivelPeligro.setNombre(getString(R.string.nivel_grave));
+                    break;
+                case "Extremo":
+                    nivelPeligro.setNombre(getString(R.string.nivel_extremo));
+                    break;
+            }
             nivelesPeligroSpinner.add(nivelPeligro);
         }
+
+        //Hacemos lo mismo para los tipos de alerta
         for (String t : tiposAlerta){
             TipoAlerta tipoAlerta = new TipoAlerta(t,false);
+            switch (tipoAlerta.getNombre()) {
+                case "Lluvias y tormentas":
+                    tipoAlerta.setNombre(getString(R.string.lluvias_tormentas));
+                    break;
+                case "Vientos":
+                    tipoAlerta.setNombre(getString(R.string.viento));
+                    break;
+                case "Granizo":
+                    tipoAlerta.setNombre(getString(R.string.granizo));
+                    break;
+                case "Nieve":
+                    tipoAlerta.setNombre(getString(R.string.nieve));
+                    break;
+                case "Derrumbamientos":
+                    tipoAlerta.setNombre(getString(R.string.derrumbamientos));
+                    break;
+            }
             tiposAlertaSpinner.add(tipoAlerta);
         }
         ProvinciasAdapter provinciaAdapter = new ProvinciasAdapter(this, provinciasSpinner);
@@ -340,13 +379,35 @@ try{
 
     public ArrayList<String> getNivelesPeligro(){
         ArrayList<String> nivelesPeligroSeleccionados = new ArrayList<>();
+        //En caso de que sean en ingles , los cambiamos a espalol (sin que el usuario lo vea)
+        //y asi podemos buscar correctamente en base de datos
         for (NivelPeligro nivelPeligro : nivelesPeligroSpinner ) {
+            //Nos hacemos una variable auxiliar ya que si no , nos volvera a traducir todos
+            // los elementos del spinner a español, en caso de que este en ingles.
+            String nivelTraducir = nivelPeligro.getNombre();
+            switch (nivelPeligro.getNombre()){
+                case "Mild":
+                    nivelTraducir = "Leve";
+                    break;
+                case "Moderated":
+                    nivelTraducir = "Moderado";
+                    break;
+                case "Important":
+                    nivelTraducir = "Importante";
+                    break;
+                case "Serious":
+                    nivelTraducir = "Grave";
+                    break;
+                case "Extreme":
+                    nivelTraducir = "Extremo";
+                    break;
+
+            }
             if (nivelPeligro.isSeleccionada()) {
-               nivelesPeligroSeleccionados.add(nivelPeligro.getNombre());
+               nivelesPeligroSeleccionados.add(nivelTraducir);
             }
         }
 
-        // Mostrar un Toast con las provincias seleccionadas
         if (nivelesPeligroSeleccionados.isEmpty()) {
             return null;
         } else {
@@ -380,8 +441,28 @@ try{
     public ArrayList<String> getTiposAlerta(){
         ArrayList<String> tiposAlertaSeleccionados = new ArrayList<>();
         for (TipoAlerta tipoAlerta : tiposAlertaSpinner ) {
+            //Nos hacemos una variable auxiliar ya que si no , nos volvera a traducir todos
+            // los elementos del spinner a español, en caso de que este en ingles.
+            String tipoAlertaTraducir = tipoAlerta.getNombre();
+            switch (tipoAlerta.getNombre()){
+                case "Rain and storm":
+                    tipoAlertaTraducir = "Lluvias y tormentas";
+                    break;
+                case "Wind":
+                    tipoAlertaTraducir = "Vientos";
+                    break;
+                case "Snow":
+                    tipoAlertaTraducir = "Nieve";
+                    break;
+                case "Landslides":
+                    tipoAlertaTraducir = "Derrumbamientos";
+                    break;
+                case "Hail":
+                    tipoAlertaTraducir = "Granizo";
+                    break;
+            }
             if (tipoAlerta.isSeleccionada()) {
-                tiposAlertaSeleccionados.add(tipoAlerta.getNombre());
+                tiposAlertaSeleccionados.add(tipoAlertaTraducir);
             }
         }
 

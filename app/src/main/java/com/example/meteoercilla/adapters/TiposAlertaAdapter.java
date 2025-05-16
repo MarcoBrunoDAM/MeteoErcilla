@@ -10,7 +10,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.meteoercilla.R;
-import com.example.meteoercilla.models.NivelPeligro;
 import com.example.meteoercilla.models.TipoAlerta;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class TiposAlertaAdapter extends ArrayAdapter<TipoAlerta> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.tipo_alertas_spinner, parent, false);
             holder = new ViewHolder();
             holder.ck_tipoAlerta = convertView.findViewById(R.id.ck_tipoAlerta);
-            holder.tx_tipoAlerta = convertView.findViewById(R.id.tx_tipoAlerta);
+            holder.tx_tipoAlerta = convertView.findViewById(R.id.tx_nivelPeligro);
             convertView.setTag(holder);
         } else {
             holder = (TiposAlertaAdapter.ViewHolder) convertView.getTag();

@@ -29,7 +29,7 @@ public class NivelesPeligroAdapter extends ArrayAdapter<NivelPeligro> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.niveles_peligro_spinner, parent, false);
             holder = new ViewHolder();
             holder.ck_nivelPeligro = convertView.findViewById(R.id.ck_tipoAlerta);
-            holder.tx_nivelPeligro = convertView.findViewById(R.id.tx_tipoAlerta);
+            holder.tx_nivelPeligro = convertView.findViewById(R.id.tx_nivelPeligro);
             convertView.setTag(holder);
         } else {
             holder = (NivelesPeligroAdapter.ViewHolder) convertView.getTag();

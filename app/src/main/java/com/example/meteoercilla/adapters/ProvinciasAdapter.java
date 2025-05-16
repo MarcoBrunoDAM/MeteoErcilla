@@ -30,7 +30,7 @@ public class ProvinciasAdapter extends ArrayAdapter<Provincia> {
             convertView = LayoutInflater.from(getContext()).inflate(R.layout.provincias_spinner, parent, false);
             holder = new ViewHolder();
             holder.ckProvincia = convertView.findViewById(R.id.ck_tipoAlerta);
-            holder.txProvincia = convertView.findViewById(R.id.tx_tipoAlerta);
+            holder.txProvincia = convertView.findViewById(R.id.tx_nivelPeligro);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
