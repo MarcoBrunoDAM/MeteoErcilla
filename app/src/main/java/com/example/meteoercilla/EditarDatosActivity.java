@@ -31,6 +31,8 @@ UsuariosDAO usuariosDAO = new UsuariosDAO();
 ArrayList<String> provincias = new ArrayList<>();
 ArrayList<String> provinciasUsuario = new ArrayList<>();
 ArrayList<Provincia> provinciasSpinner = new ArrayList<>();
+String correoEditar = "";
+String telefonoEditar = "";
 int idUsuario;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,15 +85,28 @@ int idUsuario;
 
     public void editarProvincias(View view){
         ArrayList<String> provinciasSeleccionadas = getProvoncias();
+        correoEditar = tx_correo.getText().toString();
+        telefonoEditar = tx_telefono.getText().toString();
         if(provinciasSeleccionadas == null){
+            Toast.makeText(this,"Debes elegir al menos una provincia",Toast.LENGTH_SHORT).show();
             return;
         }
         try {
             ArrayList<Integer> listaIdProvincia = usuariosDAO.getListaIdProvincia(provinciasSeleccionadas);
             //Borrmaos los registros actuales y creamos los nuevos , hace la misma funcion que actualizar
             usuariosDAO.eliminarProvincias(idUsuario);
+            int okCorreo = usuariosDAO.actualizarCorreo(correoEditar,idUsuario);
+            int okTelefono = usuariosDAO.actualizarTelefono(telefonoEditar,idUsuario);
+            if(okCorreo == 1){
+                Toast.makeText(this,"El correo al que quieres editar ya existe",Toast.LENGTH_SHORT).show();
+                return;
+            }
+            if (okTelefono == 1){
+                Toast.makeText(this,"El telefono al que quieres editar ya existe",Toast.LENGTH_SHORT).show();
+                return;
+            }
             boolean okProvincias = usuariosDAO.registrarProvincias(listaIdProvincia,idUsuario);
-            if (okProvincias){
+            if (okProvincias && okCorreo == 0 && okTelefono == 0){
                 Toast.makeText(this,"Usuario editado con exito",Toast.LENGTH_SHORT).show();
             }
         } catch (SQLException e) {

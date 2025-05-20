@@ -67,9 +67,6 @@ public class UsuariosDAO {
                 else if ( resultSet.getInt(1) == 1){
                     return 1;
                 }
-                else if (resultSet.getInt(1) == 2){
-                    return 2;
-                }
             }
 
         } catch (Exception e) {
@@ -78,7 +75,7 @@ public class UsuariosDAO {
 
 
 
-        return 3;
+        return 2;
     }
 
 
@@ -701,6 +698,72 @@ public class UsuariosDAO {
         }
 
         return null;
+    }
+
+
+    public int actualizarCorreo(String correo, int idUsuario ) throws SQLException {
+        ResultSet resultSet = null;
+
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar a base de datos");
+        }
+
+        try{
+            String query = " SELECT actualizar_correo(?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, correo);
+            preparedStatement.setInt(2, idUsuario);
+            resultSet = preparedStatement.executeQuery();
+            //Como el procedimiento de registrar devuelve un entero , usamos ese valor para saber exactamente que ha pasado
+            if( resultSet.next()){
+                if(resultSet.getInt(1) == 0){
+                    return 0;
+                }
+                else if ( resultSet.getInt(1) == 1){
+                    return 1;
+                }
+            }
+
+        } catch (Exception e) {
+            throw new SQLException("Error al realizar la consulta");
+        }
+
+
+
+        return 2;
+    }
+
+
+    public int actualizarTelefono(String telefono, int idUsuario ) throws SQLException {
+        ResultSet resultSet = null;
+
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar a base de datos");
+        }
+
+        try{
+            String query = " SELECT actualizar_telefono(?,?)";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, telefono);
+            preparedStatement.setInt(2, idUsuario);
+            resultSet = preparedStatement.executeQuery();
+            //Como el procedimiento de registrar devuelve un entero , usamos ese valor para saber exactamente que ha pasado
+            if( resultSet.next()){
+                if(resultSet.getInt(1) == 0){
+                    return 0;
+                }
+                else if ( resultSet.getInt(1) == 1){
+                    return 1;
+                }
+            }
+
+        } catch (Exception e) {
+            throw new SQLException("Error al realizar la consulta");
+        }
+
+
+
+        return 2;
     }
 
 
