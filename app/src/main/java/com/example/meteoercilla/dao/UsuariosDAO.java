@@ -157,7 +157,7 @@ public class UsuariosDAO {
         ArrayList<String> provincias = new ArrayList<>();
 
         try{
-            String query = "SELECT * FROM provincias";
+            String query = "SELECT * FROM provincias ORDER BY id_provincia ASC";
             PreparedStatement preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
             while( resultSet.next()){
