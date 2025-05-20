@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">MeteoErcilla</string>
+    <string name="registro_titulo">REGISTRO</string>
+    <string name="registrar">REGISTRAR</string>
     <string name="registro_nombre">Nombre</string>
     <string name="registro_apellidos">Apellidos</string>
     <string name="registro_correo">Correo</string>
@@ -40,4 +42,6 @@
     <string name="notificaciones_por">por</string>
     <string name="alerta_en">Alerta en:</string>
     <string name="error_conexion">Error de conexion intentalo de nuevo mas tarde</string>
+    <string name="editar">Editar</string>
+    <string name="editar_usuario">EDITAR DATOS DE USUARIO</string>
 </resources>

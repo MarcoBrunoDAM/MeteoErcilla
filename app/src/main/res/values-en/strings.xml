@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">MeteoErcilla</string>
+    <string name="registro_titulo">REGISTER</string>
+    <string name="registrar">REGISTER</string>
     <string name="registro_nombre">Name</string>
     <string name="registro_apellidos">Surname</string>
     <string name="registro_correo">Email</string>
@@ -41,4 +43,6 @@
     <string name="notificaciones_por">for</string>
     <string name="alerta_en">Alerta in:</string>
     <string name="error_conexion">Connection error. Try again later.</string>
+    <string name="editar">Edit</string>
+    <string name="editar_usuario">EDIT USER DATA</string>
 </resources>

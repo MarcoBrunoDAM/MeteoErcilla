@@ -573,10 +573,13 @@ public class UsuariosDAO {
             }
         //Antes de devolver las alertas , comprobamos que no existan 2 objetos de tipo alerta
         // que sean identicos ya que si no vamos a recibir varias notificaciones de la misma alerta
+        //En este caso para comparar uso tanto la id de la alerta como su tipo ya que el metodo equals()
+        //No funciona como esperaba
 
         for(int i = 0 ; i < resultados.size(); i++){
             for(int j = i + 1 ; j < resultados.size() ;j++){
-                if(resultados.get(i).getIdAlerta() == resultados.get(j).getIdAlerta()){
+                if(resultados.get(i).getIdAlerta() == resultados.get(j).getIdAlerta() &&
+                        resultados.get(i).getTipoAlerta().equals(resultados.get(j).getTipoAlerta())){
                     resultados.remove(resultados.get(j));
                     j--;
                 }
