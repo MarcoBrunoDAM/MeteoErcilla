@@ -40,9 +40,10 @@ public class MenuActivity extends AppCompatActivity {
     private SettingsClient settingsClient;
     int contadorPermisos = 0;
     private Context context;
+    SharedPreferences sharedPreferences;
     private CheckUbicationService checkUbicationService;
     String ultimaUbicacion;
-    int id_usuario;
+    String id_usuarioSesion;
     int userId;
     Button btn_buscar, btn_editar, btn_logout;
 
@@ -57,6 +58,8 @@ public class MenuActivity extends AppCompatActivity {
             return insets;
         });
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        sharedPreferences = getSharedPreferences("Sesion",Context.MODE_PRIVATE);
+        id_usuarioSesion = sharedPreferences.getString("userId",null);
         checkUbicationService = new CheckUbicationService(this);
         //Creamos lo necesario para el servicio en otra clase pero el servicio se ejecuta aqui
         this.locationRequest = checkUbicationService.getLocationRequest();
@@ -71,7 +74,6 @@ public class MenuActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
         //Con esto evitamos que se formen bucles si le damos a NO PERMITIR
         //Solicitamos los permisos en caso de que no los tengamos al igual que en el main activity
         // en el caso que pasemos directamente al menu por el login automatico
@@ -88,11 +90,12 @@ public class MenuActivity extends AppCompatActivity {
 
     protected void onStart() {
         super.onStart();
-        id_usuario = getIntent().getIntExtra("id_usuario", 0);
-        if (getIntent().getStringExtra("userID") != null) {
-            userId = Integer.valueOf(getIntent().getStringExtra("userID"));
-            Toast.makeText(this, "Inicio automatico: " + userId, Toast.LENGTH_SHORT).show();
+        //Capturamos primero el dato como string y luego convertimos para evitar
+        //NullPointerException
+        if(id_usuarioSesion != null){
+            userId = Integer.valueOf(id_usuarioSesion);
         }
+        Toast.makeText(this,"ID: " +userId,Toast.LENGTH_SHORT).show();
         ultimaUbicacion = obtenerUltimaUbicacion();
         //ejecutarServicioAlertas(this);
         if (ultimaUbicacion != null) {

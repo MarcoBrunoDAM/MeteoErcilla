@@ -50,7 +50,7 @@
 
     <EditText
         android:id="@+id/tx_correoEditar"
-        android:layout_width="200dp"
+        android:layout_width="240dp"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_edit_text"
@@ -60,7 +60,7 @@
         android:inputType="text"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textColorHighlight="#FF9800"
+        android:textColorHighlight="#03A8FF"
         android:textColorHint="@color/black"
         android:textColorLink="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,7 +84,7 @@
 
     <EditText
         android:id="@+id/tx_telefonoEditar"
-        android:layout_width="200dp"
+        android:layout_width="240dp"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_edit_text"
@@ -93,6 +93,8 @@
         android:hint="@string/registro_telefono"
         android:inputType="phone"
         android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHighlight="#03A8FF"
         android:textColorHint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -114,7 +116,7 @@
 
     <Spinner
         android:id="@+id/sp_provinciasEditar"
-        android:layout_width="200dp"
+        android:layout_width="240dp"
         android:layout_height="45dp"
         android:layout_marginTop="10dp"
         android:background="@drawable/rounded_edit_text"
@@ -131,7 +133,7 @@
         android:layout_marginTop="60dp"
         android:backgroundTint="#03A8FF"
         android:onClick="editarProvincias"
-        android:text="EDITAR"
+        android:text="@string/editar"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"

@@ -53,7 +53,6 @@ public class LoginActivity extends AppCompatActivity {
                     int idUsuario = usuariosDAO.getIdUsuario(correo);
                     Toast.makeText(this, "LOGIN EXITOSO", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, MenuActivity.class);
-                    intent.putExtra("id_usuario", idUsuario);
                     guardarSesion(String.valueOf(idUsuario), correo);
                     startActivity(intent);
                     finish();
@@ -76,6 +75,6 @@ public class LoginActivity extends AppCompatActivity {
             //No guardamos la contraseña por motivos obvios de seguridad
             editor.putString("userId", userId);
             editor.putString("correo", correo);
-            editor.apply();  // o commit() si quieres que sea inmediato
+            editor.apply();
         }
     }

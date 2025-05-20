@@ -77,6 +77,7 @@ public class UsuariosDAO {
         }
 
 
+
         return 3;
     }
 
@@ -612,6 +613,9 @@ public class UsuariosDAO {
             } catch (Exception e) {
                 throw new SQLException("Error al realizar la consulta");
             }
+
+
+
     }
 
 
@@ -639,7 +643,66 @@ public class UsuariosDAO {
         } catch (Exception e) {
             throw new SQLException("Error al realizar la consulta");
         }
+
+
         return false;
     }
+
+
+
+    public String getCorreoById(int idUsuario) throws SQLException {
+        ResultSet resultSet = null;
+
+
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar a base de datos");
+        }
+
+        try{
+            String query = "SELECT correo FROM usuarios WHERE id_usuario = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,idUsuario);
+            resultSet = preparedStatement.executeQuery();
+            //Como el procedimiento de registrar devuelve un entero , usamos ese valor para saber exactamente que ha pasado
+            if( resultSet.next()){
+                String correo = resultSet.getString(1);
+                return correo;
+            }
+
+        } catch (Exception e) {
+            throw new SQLException("Error al realizar la consulta");
+        }
+
+
+        return null;
+    }
+
+    public String getTelefonoById(int idUsuario) throws SQLException {
+        ResultSet resultSet = null;
+
+
+        if(!initDBConnection()){
+            throw new SQLException("Error al conectar a base de datos");
+        }
+
+        try{
+            String query = "SELECT telefono FROM usuarios WHERE id_usuario = ?";
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1,idUsuario);
+            resultSet = preparedStatement.executeQuery();
+            //Como el procedimiento de registrar devuelve un entero , usamos ese valor para saber exactamente que ha pasado
+            if( resultSet.next()){
+                String telefono = resultSet.getString(1);
+                return telefono;
+            }
+
+        } catch (Exception e) {
+            throw new SQLException("Error al realizar la consulta");
+        }
+
+        return null;
+    }
+
+
 
 }

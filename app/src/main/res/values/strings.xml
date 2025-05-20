@@ -42,6 +42,6 @@
     <string name="notificaciones_por">por</string>
     <string name="alerta_en">Alerta en:</string>
     <string name="error_conexion">Error de conexion intentalo de nuevo mas tarde</string>
-    <string name="editar">Editar</string>
+    <string name="editar">EDITAR</string>
     <string name="editar_usuario">EDITAR DATOS DE USUARIO</string>
 </resources>

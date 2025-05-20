@@ -74,43 +74,47 @@ Context context;
                     SharedPreferences sharedPreferences2 = context.getSharedPreferences("Alertas",Context.MODE_PRIVATE);
                     String alertasUsuarioDispositivo = sharedPreferences2.getString("alertas",null);
                     //Primero comprueba si hay alertas que deban ser lanzadas
-                    Toast.makeText(context, "Ultima ubicacion servicio: " + ultimaUbicacion, Toast.LENGTH_SHORT).show();
-                    int idUbicacion = usuariosDAO.getIdProvinciaByNombre(ultimaUbicacion);
-                  //Aqui como no tenemos un usuario logeado , no tenemos su lista de provincias con lo cual
-                    // solo buscara con la ubicacion actual o la ultima registrada-
-                    ArrayList<Alerta> alertas = usuariosDAO.getAlertasServicio(null, idUbicacion);
-                    ArrayList<String> alertasCheck = new ArrayList<>();
-                    if(alertasUsuarioDispositivo != null) {
-                        String al[] = alertasUsuarioDispositivo.split(",");
-                        for (int i = 0; i < al.length; i++) {
-                            if (!al[i].equals(",")) {
-                                alertasCheck.add(al[i]);
+                    if(ultimaUbicacion != null) {
+                        Toast.makeText(context, "Ultima ubicacion servicio: " + ultimaUbicacion, Toast.LENGTH_SHORT).show();
+                        int idUbicacion = usuariosDAO.getIdProvinciaByNombre(ultimaUbicacion);
+                        //Aqui como no tenemos un usuario logeado , no tenemos su lista de provincias con lo cual
+                        // solo buscara con la ubicacion actual o la ultima registrada-
+                        ArrayList<Alerta> alertas = usuariosDAO.getAlertasServicio(null, idUbicacion);
+                        ArrayList<String> alertasCheck = new ArrayList<>();
+                        if (alertasUsuarioDispositivo != null) {
+                            String al[] = alertasUsuarioDispositivo.split(",");
+                            for (int i = 0; i < al.length; i++) {
+                                if (!al[i].equals(",")) {
+                                    alertasCheck.add(al[i]);
+                                }
+                            }
+                        } else {
+                            //Le añadimos un espacio vacio para no dejarlo en null y evitar excepciones.
+                            alertasCheck.add("");
+                        }
+                        if (alertas.size() >= 1) {
+                            for (Alerta a : alertas) {
+                                if (alertasCheck.contains(String.valueOf(a.getIdAlerta()))) {
+                                    Toast.makeText(context, "La alerta " + a.getIdAlerta() + " ya ha sido notificada", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(context, "Se han encontrado alertas", Toast.LENGTH_SHORT).show();
+                                    Intent notificationIntent = new Intent(context, NotificacionesAlerta.class);
+                                    notificationIntent.putExtra("alerta", a);
+                                    notificationIntent.putExtra("idUsuario", 0);
+                                    context.sendBroadcast(notificationIntent);
+                                }
                             }
                         }
                     }
-                    else {
-                        //Le añadimos un espacio vacio para no dejarlo en null y evitar excepciones.
-                        alertasCheck.add("");
-                    }
-                    if (alertas.size() >= 1) {
-                        for (Alerta a : alertas) {
-                            if(alertasCheck.contains(String.valueOf(a.getIdAlerta()))){
-                                Toast.makeText(context,"La alerta " +a.getIdAlerta()+ " ya ha sido notificada",Toast.LENGTH_SHORT).show();
-                            }
-                            else {
-                                Toast.makeText(context, "Se han encontrado alertas", Toast.LENGTH_SHORT).show();
-                                Intent notificationIntent = new Intent(context, NotificacionesAlerta.class);
-                                notificationIntent.putExtra("alerta", a);
-                                notificationIntent.putExtra("idUsuario", 0);
-                                context.sendBroadcast(notificationIntent);
-                            }
-                           }
+                    else{
+                        Toast.makeText(context,"NO HAY NINGUNA UBICACION GUARDADA",Toast.LENGTH_SHORT).show();
                     }
                 } catch (SQLException e) {
                     Toast.makeText(context, "Error en las alertas", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
+
         }
         public void obtenerUbicacion () {
             ObtenerUbicacionService ubicacionService = new ObtenerUbicacionService(this.context);

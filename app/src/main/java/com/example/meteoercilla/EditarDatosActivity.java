@@ -4,6 +4,7 @@ import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -22,7 +23,10 @@ import java.util.ArrayList;
 
 public class EditarDatosActivity extends AppCompatActivity {
 Spinner sp_provincias;
+EditText tx_correo , tx_telefono;
 Button btn_editar;
+String correo = "";
+String telefono = "";
 UsuariosDAO usuariosDAO = new UsuariosDAO();
 ArrayList<String> provincias = new ArrayList<>();
 ArrayList<String> provinciasUsuario = new ArrayList<>();
@@ -42,8 +46,12 @@ int idUsuario;
         idUsuario = getIntent().getIntExtra("id_usuario",0);
         Toast.makeText(this, "ID a editar: " +idUsuario, Toast.LENGTH_SHORT).show();
         sp_provincias = findViewById(R.id.sp_provinciasEditar);
+        tx_correo = findViewById(R.id.tx_correoEditar);
+        tx_telefono = findViewById(R.id.tx_telefonoEditar);
         btn_editar = findViewById(R.id.btn_editarUsuario);
         try {
+            correo = usuariosDAO.getCorreoById(idUsuario);
+            telefono = usuariosDAO.getTelefonoById(idUsuario);
             provincias = usuariosDAO.getProvincias();
             provinciasUsuario = usuariosDAO.getNombresProvinciaByID(idUsuario);
         } catch (SQLException e) {
@@ -64,6 +72,8 @@ int idUsuario;
         }
         ProvinciasAdapter provinciaAdapter = new ProvinciasAdapter(this, provinciasSpinner);
         sp_provincias.setAdapter(provinciaAdapter);
+        tx_correo.setText(correo);
+        tx_telefono.setText(telefono);
     }
 
     public void onStart(){

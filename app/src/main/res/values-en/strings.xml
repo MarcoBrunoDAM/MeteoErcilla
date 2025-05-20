@@ -43,6 +43,6 @@
     <string name="notificaciones_por">for</string>
     <string name="alerta_en">Alerta in:</string>
     <string name="error_conexion">Connection error. Try again later.</string>
-    <string name="editar">Edit</string>
+    <string name="editar">EDIT</string>
     <string name="editar_usuario">EDIT USER DATA</string>
 </resources>
