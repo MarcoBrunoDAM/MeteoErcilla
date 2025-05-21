@@ -10,6 +10,11 @@
     <string name="registro_telefono">Telefono</string>
     <string name="registro_repetir_contrasena">Repite la contraseña</string>
     <string name="registro_elegir_provincias">Elige tus provincias</string>
+    <string name="registro_contrasena_invalida">Las contraseñas no coinciden</string>
+    <string name="registro_provincias_vacias">Debes elegir una o mas provincias</string>
+    <string name="registro_existe">Este correo o numero de telefono ya existe</string>
+    <string name="registro_vacio">No puede haber campos vacios</string>
+    <string name="registro_exito">El usuario ha sido registrado con exito</string>
     <string name="iniciar_sesion">INICIAR SESION</string>
     <string name="busqueda_fechas">Rango de fechas</string>
     <string name="desde">Desde</string>

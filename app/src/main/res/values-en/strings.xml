@@ -11,6 +11,11 @@
     <string name="registro_telefono">Phone</string>
     <string name="registro_repetir_contrasena">Repeat the password</string>
     <string name="registro_elegir_provincias">Choose your provinces</string>
+    <string name="registro_contrasena_invalida">The passwords dont match</string>
+    <string name="registro_provincias_vacias">You must select one or more provinces</string>
+    <string name="registro_existe">This email or phone number already exists</string>
+    <string name="registro_vacio">There cannot be empty fields</string>
+    <string name="registro_exito">The user was registered successfully</string>
     <string name="iniciar_sesion">LOGIN</string>
     <string name="busqueda_fechas">Date range</string>
     <string name="desde">From</string>

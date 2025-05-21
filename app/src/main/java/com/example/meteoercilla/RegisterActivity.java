@@ -74,11 +74,11 @@ public class RegisterActivity extends AppCompatActivity {
         String password = tx_password.getText().toString();
         String repeatPassword = tx_repeatPassword.getText().toString();
         if (!password.equals(repeatPassword)){
-            Toast.makeText(this,"Las contraseñas no coinciden",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.registro_contrasena_invalida,Toast.LENGTH_SHORT).show();
         }
         else if(nombre.equals("") || apellidos.equals("") || correo.equals("") || telefono.equals("")
         || password.equals("") || repeatPassword.equals("")){
-            Toast.makeText(this,"No puede haber campos vacios",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,R.string.registro_vacio,Toast.LENGTH_SHORT).show();
         }
         else{
             Usuario usuario = new Usuario(nombre,apellidos,correo,telefono,password);
@@ -92,13 +92,13 @@ public class RegisterActivity extends AppCompatActivity {
                 int okRegistro = usuariosDAO.registroUsuario(usuario);
 
                 if (okRegistro == 1){
-                    Toast.makeText(this,"Este correo ya existe",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,R.string.registro_existe,Toast.LENGTH_SHORT).show();
                 }
                 else if (okRegistro == 0){
                     int idUsuario = usuariosDAO.getIdUsuario(correo);
                     boolean okProvincias = usuariosDAO.registrarProvincias(listaIdProvincia,idUsuario);
                     if (okProvincias){
-                        Toast.makeText(this,"Usuario registrado con exito",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this,R.string.registro_exito,Toast.LENGTH_SHORT).show();
                     }
                 }
             } catch (SQLException e) {
