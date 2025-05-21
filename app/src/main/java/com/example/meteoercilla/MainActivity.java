@@ -101,8 +101,6 @@ UsuariosDAO usuariosDAO = new UsuariosDAO();
             chekActivatedUbication();
 //            SmsManager smsManager = SmsManager.getDefault();
 //            smsManager.sendTextMessage("+34643406362", "Meteoercilla", "Hola desde tu app!", null, null);
-            SharedPreferences sharedPreferences = getSharedPreferences("Alertas",Context.MODE_PRIVATE);
-            String alertas = sharedPreferences.getString("alertas",null);
         }
 
 

@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.example.meteoercilla.dao.UsuariosDAO;
 import com.example.meteoercilla.models.Alerta;
 import com.example.meteoercilla.notificaciones.NotificacionesAlerta;
+import com.example.meteoercilla.permissions.NotifyPermissions;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -52,11 +53,15 @@ Context context;
                                 //En caso de no haber sido notificada , mandamos esa alerta
                                 //como intent al creador de notificaciones.
                                 //Al ser en bucle nos mandara x notificaciones como x alertas tengamos.
-                                Toast.makeText(context, "Se han encontrado alertas", Toast.LENGTH_SHORT).show();
-                                Intent notificationIntent = new Intent(context, NotificacionesAlerta.class);
-                                notificationIntent.putExtra("alerta", a);
-                                notificationIntent.putExtra("idUsuario", idUser);
-                                context.sendBroadcast(notificationIntent);
+
+                                //Comprobamos que sigamos teniendo los permisos antes de mandarlas.
+                                if(NotifyPermissions.tienePermisoNotificaciones(context)) {
+                                    Toast.makeText(context, "Se han encontrado alertas", Toast.LENGTH_SHORT).show();
+                                    Intent notificationIntent = new Intent(context, NotificacionesAlerta.class);
+                                    notificationIntent.putExtra("alerta", a);
+                                    notificationIntent.putExtra("idUsuario", idUser);
+                                    context.sendBroadcast(notificationIntent);
+                                }
                             }
 
                         }
@@ -97,11 +102,13 @@ Context context;
                                 if (alertasCheck.contains(String.valueOf(a.getIdAlerta()))) {
                                     Toast.makeText(context, "La alerta " + a.getIdAlerta() + " ya ha sido notificada", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    Toast.makeText(context, "Se han encontrado alertas", Toast.LENGTH_SHORT).show();
-                                    Intent notificationIntent = new Intent(context, NotificacionesAlerta.class);
-                                    notificationIntent.putExtra("alerta", a);
-                                    notificationIntent.putExtra("idUsuario", 0);
-                                    context.sendBroadcast(notificationIntent);
+                                    if(NotifyPermissions.tienePermisoNotificaciones(context)) {
+                                        Toast.makeText(context, "Se han encontrado alertas", Toast.LENGTH_SHORT).show();
+                                        Intent notificationIntent = new Intent(context, NotificacionesAlerta.class);
+                                        notificationIntent.putExtra("alerta", a);
+                                        notificationIntent.putExtra("idUsuario", 0);
+                                        context.sendBroadcast(notificationIntent);
+                                    }
                                 }
                             }
                         }

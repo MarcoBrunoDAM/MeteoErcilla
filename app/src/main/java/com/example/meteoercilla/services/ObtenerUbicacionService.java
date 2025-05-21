@@ -25,6 +25,7 @@ import java.util.Locale;
 public class ObtenerUbicacionService {
     private final Context context;
     private FusedLocationProviderClient fusedLocationClient;
+    boolean permisoUbicacion;
     private LocationRequest locationRequest;
     private LocationCallback locationCallback;
 
@@ -51,6 +52,7 @@ public class ObtenerUbicacionService {
                     // el cual usando la clase Geocoder nos traduce esas coordenadas a
                     //nuestra ciudad actual
                     obtenerCiudad(context, lat, lon);
+
                 }
             }
         };
@@ -59,7 +61,9 @@ public class ObtenerUbicacionService {
         //contantemente que la app posea el permiso de ubicacion para obtenerla en tiempo real
         if (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
             fusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, Looper.getMainLooper());
+            permisoUbicacion = true;
         }
+
     }
 
     public void obtenerCiudad(Context context, double latitud, double longitud){
@@ -84,6 +88,6 @@ public class ObtenerUbicacionService {
         SharedPreferences sharedPreferences = context.getSharedPreferences("Ubicacion",Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("ultimaUbicacion" , ubicacion);
-        editor.apply();  // o commit() si quieres que sea inmediato
+        editor.apply();
     }
 }
