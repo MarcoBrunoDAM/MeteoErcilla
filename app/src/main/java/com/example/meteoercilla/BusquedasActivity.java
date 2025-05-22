@@ -241,9 +241,14 @@ try{
             ArrayList<Alerta> resultados = new ArrayList<>();
             resultados = meteoErcillaDAO.getResultadosBusqueda(query);
             defaultQuery();
-            Intent intent = new Intent(this, ResultadosBusquedaActivity.class);
-            intent.putExtra("resultados", resultados);
-            startActivity(intent);
+            if(resultados.size()  >= 1) {
+                Intent intent = new Intent(this, ResultadosBusquedaActivity.class);
+                intent.putExtra("resultados", resultados);
+                startActivity(intent);
+            }
+            else {
+                Toast.makeText(this, "No hay ningun resultado", Toast.LENGTH_SHORT).show();
+            }
         }
     }
     else {
