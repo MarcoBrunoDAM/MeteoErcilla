@@ -75,7 +75,7 @@ Context context;
                 try {
                     SharedPreferences sharedPreferences2 = context.getSharedPreferences("Alertas",Context.MODE_PRIVATE);
                     String alertasUsuarioDispositivo = sharedPreferences2.getString("alertas",null);
-                    //Primero comprueba si hay alertas que deban ser lanzadas
+                    //Primero comprueba si hay una ubicacion guardada
                     if(ultimaUbicacion != null) {
                         Toast.makeText(context, "Ultima ubicacion servicio: " + ultimaUbicacion, Toast.LENGTH_SHORT).show();
                         int idUbicacion = meteoErcillaDAO.getIdProvinciaByNombre(ultimaUbicacion);
