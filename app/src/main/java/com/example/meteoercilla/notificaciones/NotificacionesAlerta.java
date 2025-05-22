@@ -1,33 +1,25 @@
 package com.example.meteoercilla.notificaciones;
 
-import static android.content.Intent.getIntent;
-
-import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.widget.Toast;
 
 import androidx.core.app.NotificationCompat;
 
 import com.example.meteoercilla.R;
-import com.example.meteoercilla.dao.UsuariosDAO;
+import com.example.meteoercilla.dao.MeteoErcillaDAO;
 import com.example.meteoercilla.models.Alerta;
-import com.example.meteoercilla.services.AlertasService;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class NotificacionesAlerta extends BroadcastReceiver {
 
 String channelId = "alerta";
-UsuariosDAO usuariosDAO = new UsuariosDAO();
+MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -100,7 +92,7 @@ UsuariosDAO usuariosDAO = new UsuariosDAO();
             //de ser asi , no se repite la misma notificacion
             try {
                 if(idUsuario != 0) {
-                    usuariosDAO.notificarAlerta(idUsuario, alerta.getIdAlerta());
+                    meteoErcillaDAO.notificarAlerta(idUsuario, alerta.getIdAlerta());
                 }
                 else{
                     //Al igual que a un usuario logeado le guardamos su alerta notificada

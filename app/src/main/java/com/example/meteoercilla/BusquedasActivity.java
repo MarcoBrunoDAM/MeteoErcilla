@@ -19,7 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.meteoercilla.adapters.NivelesPeligroAdapter;
 import com.example.meteoercilla.adapters.ProvinciasAdapter;
 import com.example.meteoercilla.adapters.TiposAlertaAdapter;
-import com.example.meteoercilla.dao.UsuariosDAO;
+import com.example.meteoercilla.dao.MeteoErcillaDAO;
 import com.example.meteoercilla.models.Alerta;
 import com.example.meteoercilla.models.NivelPeligro;
 import com.example.meteoercilla.models.Provincia;
@@ -41,7 +41,7 @@ ArrayList<String> nivelesPeligro = new ArrayList<>();
 ArrayList<NivelPeligro> nivelesPeligroSpinner = new ArrayList<>();
 ArrayList<String> tiposAlerta = new ArrayList<>();
 ArrayList<TipoAlerta> tiposAlertaSpinner = new ArrayList<>();
-UsuariosDAO usuariosDAO = new UsuariosDAO();
+MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
 int contadorFechas = 0;
 int contadorProvincias = 0;
 int contadorNiveles = 0;
@@ -153,9 +153,9 @@ DateTimeFormatter formatoSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         //Rellenamos ahora los spinners
         try {
-            provincias = usuariosDAO.getProvincias();
-            nivelesPeligro = usuariosDAO.getNivelesPeligro();
-            tiposAlerta = usuariosDAO.getTiposAlerta();
+            provincias = meteoErcillaDAO.getProvincias();
+            nivelesPeligro = meteoErcillaDAO.getNivelesPeligro();
+            tiposAlerta = meteoErcillaDAO.getTiposAlerta();
         } catch (SQLException e) {
             Intent intent = new Intent(this,MenuActivity.class);
             Toast.makeText(this,R.string.error_conexion,Toast.LENGTH_SHORT).show();
@@ -239,7 +239,7 @@ try{
             contadorTipos = 0;
             query = query;
             ArrayList<Alerta> resultados = new ArrayList<>();
-            resultados = usuariosDAO.getResultadosBusqueda(query);
+            resultados = meteoErcillaDAO.getResultadosBusqueda(query);
             defaultQuery();
             Intent intent = new Intent(this, ResultadosBusquedaActivity.class);
             intent.putExtra("resultados", resultados);
@@ -299,7 +299,7 @@ try{
         } else {
             try {
 
-                ArrayList<Integer> listaIdProvincia = usuariosDAO.getListaIdProvincia(provinciaSeleccionadas);
+                ArrayList<Integer> listaIdProvincia = meteoErcillaDAO.getListaIdProvincia(provinciaSeleccionadas);
                 //Esto se hace para que la query solo se modifique una vez , ya que entramos varias veces al metodo
                 if(contadorProvincias == 0) {
                     //Primero agregamos si o si la primera opcion a la query y despues si hay mas

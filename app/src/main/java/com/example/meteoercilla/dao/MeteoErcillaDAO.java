@@ -1,7 +1,5 @@
 package com.example.meteoercilla.dao;
 
-import com.example.meteoercilla.R;
-import com.example.meteoercilla.database.SQLDatabaseManager;
 import com.example.meteoercilla.database.SQLDatabaseManagerRemota;
 import com.example.meteoercilla.models.Alerta;
 import com.example.meteoercilla.models.Usuario;
@@ -10,10 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class UsuariosDAO {
+public class MeteoErcillaDAO {
     private Connection connection;
 
     public boolean initDBConnection() {

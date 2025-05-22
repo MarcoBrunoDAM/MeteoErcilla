@@ -3,7 +3,6 @@ package com.example.meteoercilla;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -16,7 +15,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.meteoercilla.adapters.ProvinciasAdapter;
-import com.example.meteoercilla.dao.UsuariosDAO;
+import com.example.meteoercilla.dao.MeteoErcillaDAO;
 import com.example.meteoercilla.models.Provincia;
 import com.example.meteoercilla.models.Usuario;
 
@@ -27,7 +26,7 @@ public class RegisterActivity extends AppCompatActivity {
     EditText tx_nombre, tx_apellidos, tx_correo, tx_telefono, tx_password, tx_repeatPassword;
     Button btn_registrarUsuario,btn_provincias;
     Spinner sp_provincias;
-    UsuariosDAO usuariosDAO = new UsuariosDAO();
+    MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
     ArrayList<String> provincias = new ArrayList<>();
     ArrayList<Provincia> provinciasSpinner = new ArrayList<>();
 
@@ -51,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity {
         btn_registrarUsuario = findViewById(R.id.btn_registrarUsuario);
         sp_provincias = findViewById(R.id.sp_provincias);
         try {
-            provincias = usuariosDAO.getProvincias();
+            provincias = meteoErcillaDAO.getProvincias();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -88,15 +87,15 @@ public class RegisterActivity extends AppCompatActivity {
                     Toast.makeText(this,"Debes elegir una o mas provincias",Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ArrayList<Integer> listaIdProvincia = usuariosDAO.getListaIdProvincia(provinciasSeleccionadas);
-                int okRegistro = usuariosDAO.registroUsuario(usuario);
+                ArrayList<Integer> listaIdProvincia = meteoErcillaDAO.getListaIdProvincia(provinciasSeleccionadas);
+                int okRegistro = meteoErcillaDAO.registroUsuario(usuario);
 
                 if (okRegistro == 1){
                     Toast.makeText(this,R.string.registro_existe,Toast.LENGTH_SHORT).show();
                 }
                 else if (okRegistro == 0){
-                    int idUsuario = usuariosDAO.getIdUsuario(correo);
-                    boolean okProvincias = usuariosDAO.registrarProvincias(listaIdProvincia,idUsuario);
+                    int idUsuario = meteoErcillaDAO.getIdUsuario(correo);
+                    boolean okProvincias = meteoErcillaDAO.registrarProvincias(listaIdProvincia,idUsuario);
                     if (okProvincias){
                         Toast.makeText(this,R.string.registro_exito,Toast.LENGTH_SHORT).show();
                     }

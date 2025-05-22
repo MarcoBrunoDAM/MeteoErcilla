@@ -16,12 +16,12 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.meteoercilla.dao.UsuariosDAO;
+import com.example.meteoercilla.dao.MeteoErcillaDAO;
 
 import java.sql.SQLException;
 
 public class LoginActivity extends AppCompatActivity {
-    UsuariosDAO usuariosDAO = new UsuariosDAO();
+    MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
     EditText tx_correo , tx_password;
     Button btn_login;
     @Override
@@ -44,13 +44,13 @@ public class LoginActivity extends AppCompatActivity {
         String correo = tx_correo.getText().toString();
         String password = tx_password.getText().toString();
         try{
-            int okLogin = usuariosDAO.loginUsuario(correo,password);
+            int okLogin = meteoErcillaDAO.loginUsuario(correo,password);
             if(correo.equals("") || password.equals("")){
                 Toast.makeText(this,"No puede haber campos vacios",Toast.LENGTH_SHORT).show();
             }
             else {
                 if (okLogin == 0) {
-                    int idUsuario = usuariosDAO.getIdUsuario(correo);
+                    int idUsuario = meteoErcillaDAO.getIdUsuario(correo);
                     Toast.makeText(this, "LOGIN EXITOSO", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(this, MenuActivity.class);
                     guardarSesion(String.valueOf(idUsuario), correo);

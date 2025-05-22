@@ -7,10 +7,7 @@ import android.content.Intent;
 import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
-import android.location.Location;
 import android.os.Bundle;
-import android.provider.Settings;
-import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,8 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import com.example.meteoercilla.dao.UsuariosDAO;
-import com.example.meteoercilla.database.SQLDatabaseManager;
+import com.example.meteoercilla.dao.MeteoErcillaDAO;
 import com.example.meteoercilla.database.SQLDatabaseManagerRemota;
 import com.example.meteoercilla.permissions.NotifyPermissions;
 import com.example.meteoercilla.permissions.UbicationPermission;
@@ -30,21 +26,14 @@ import com.example.meteoercilla.services.AlertasService;
 import com.example.meteoercilla.services.CheckUbicationService;
 import com.example.meteoercilla.services.ObtenerUbicacionService;
 import com.google.android.gms.common.api.ResolvableApiException;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
-import com.google.android.gms.location.LocationResult;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
-import com.google.android.gms.location.Priority;
 import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.Task;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity {
 private static final int REQUEST_CHECK_SETTINGS = 1001;
@@ -55,7 +44,7 @@ private CheckUbicationService checkUbicationService;
 //Esta variable existe para evitar problemas de bucles a la hora de solicitar permisos
 int contadorPermisos = 0;
 Button btn_login, btn_registrar;
-UsuariosDAO usuariosDAO = new UsuariosDAO();
+MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
 //Estas 3 variables las usaremos para obtener la latitud y longitud de nuestra ubicacion
 
     @Override
