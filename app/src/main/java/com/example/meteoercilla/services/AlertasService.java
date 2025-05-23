@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import com.example.meteoercilla.dao.AlertasDAO;
 import com.example.meteoercilla.dao.MeteoErcillaDAO;
 import com.example.meteoercilla.models.Alerta;
 import com.example.meteoercilla.notificaciones.NotificacionesAlerta;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class AlertasService extends BroadcastReceiver {
-MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
+AlertasDAO alertasDAO = new AlertasDAO();
 Context context;
 //Este servicio se lanza cada x segundos cada vez que se inicia la app,
 //realiza las comprobaciones en base de datos y en base a lo que devuelva ,
@@ -35,16 +36,16 @@ Context context;
                 try {
                     //Primero comprueba si hay alertas que deban ser lanzadas
                     Toast.makeText(context, "Ultima ubicacion servicio: " + ultimaUbicacion, Toast.LENGTH_SHORT).show();
-                    int idUbicacion = meteoErcillaDAO.getIdProvinciaByNombre(ultimaUbicacion);
+                    int idUbicacion = alertasDAO.getIdProvinciaByNombre(ultimaUbicacion);
                     //Si no hay una ultimaUbicacion la id sera 0 , con lo cual al buscar en base de datos con
                     // la id 0 al no existir solo te va a devolver las alertas de las provincias que el usuario
                     //tenga registradas, esto en caso por ejemplo que la app no tenga permisos de ubicacion
-                    ArrayList<Integer> listaProvincias = meteoErcillaDAO.getIDsProvinciaByID(idUser);
-                    ArrayList<Alerta> alertas = meteoErcillaDAO.getAlertasServicio(listaProvincias, idUbicacion);
+                    ArrayList<Integer> listaProvincias = alertasDAO.getIDsProvinciaByID(idUser);
+                    ArrayList<Alerta> alertas = alertasDAO.getAlertasServicio(listaProvincias, idUbicacion);
                     if (alertas.size() >= 1) {
                         for (Alerta a : alertas) {
                             //Ahora comprobamos si esas alertas han sido notificadas previamente o no
-                            boolean estaNotificada = meteoErcillaDAO.comprobarAlertaNotificada(idUser, a.getIdAlerta());
+                            boolean estaNotificada = alertasDAO.comprobarAlertaNotificada(idUser, a.getIdAlerta());
                             //Si no ha sido notificada , se notifica , en caso contrario , no hace nada
                             if (!estaNotificada) {
                                 //En caso de no haber sido notificada , mandamos esa alerta
@@ -78,10 +79,10 @@ Context context;
                     //Primero comprueba si hay una ubicacion guardada
                     if(ultimaUbicacion != null) {
                         Toast.makeText(context, "Ultima ubicacion servicio: " + ultimaUbicacion, Toast.LENGTH_SHORT).show();
-                        int idUbicacion = meteoErcillaDAO.getIdProvinciaByNombre(ultimaUbicacion);
+                        int idUbicacion = alertasDAO.getIdProvinciaByNombre(ultimaUbicacion);
                         //Aqui como no tenemos un usuario logeado , no tenemos su lista de provincias con lo cual
                         // solo buscara con la ubicacion actual o la ultima registrada-
-                        ArrayList<Alerta> alertas = meteoErcillaDAO.getAlertasServicio(null, idUbicacion);
+                        ArrayList<Alerta> alertas = alertasDAO.getAlertasServicio(null, idUbicacion);
                         ArrayList<String> alertasCheck = new ArrayList<>();
                         if (alertasUsuarioDispositivo != null) {
                             String al[] = alertasUsuarioDispositivo.split(",");

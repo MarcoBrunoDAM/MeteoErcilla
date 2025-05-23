@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.meteoercilla.adapters.NivelesPeligroAdapter;
 import com.example.meteoercilla.adapters.ProvinciasAdapter;
 import com.example.meteoercilla.adapters.TiposAlertaAdapter;
+import com.example.meteoercilla.dao.BusquedasDAO;
 import com.example.meteoercilla.dao.MeteoErcillaDAO;
 import com.example.meteoercilla.models.Alerta;
 import com.example.meteoercilla.models.NivelPeligro;
@@ -42,6 +43,7 @@ ArrayList<NivelPeligro> nivelesPeligroSpinner = new ArrayList<>();
 ArrayList<String> tiposAlerta = new ArrayList<>();
 ArrayList<TipoAlerta> tiposAlertaSpinner = new ArrayList<>();
 MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
+BusquedasDAO busquedasDAO = new BusquedasDAO();
 int contadorFechas = 0;
 int contadorProvincias = 0;
 int contadorNiveles = 0;
@@ -127,6 +129,8 @@ DateTimeFormatter formatoSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                     (view, year, month, dayOfMonth) -> {
                         String fechaSeleccionada = "";
                         String day , monthFormat;
+                        //Esto quiere decir que si el dia es menor que 10
+                        //El formato sea 0+mes es decir el dia 1 seria 01.
                         if(dayOfMonth == 1 || dayOfMonth == 2 || dayOfMonth == 3 || dayOfMonth == 4
                                 || dayOfMonth == 5 || dayOfMonth == 6 || dayOfMonth == 7 || dayOfMonth == 8 || dayOfMonth == 9){
                             day = "0"+dayOfMonth;
@@ -135,6 +139,8 @@ DateTimeFormatter formatoSalida = DateTimeFormatter.ofPattern("yyyy-MM-dd");
                             day = String.valueOf(dayOfMonth);
                         }
                         //Los meses tienen de indice de 0 a 11
+                        //Esto quiere decir que si el mes es menor que octubre (10)
+                        //El formato sea 0+mes es decir enero seria 01.
                         if(month != 9 && month != 10 && month != 11 ){
                             monthFormat = "0"+(month+1);
                         }
@@ -239,7 +245,7 @@ try{
             contadorTipos = 0;
             query = query;
             ArrayList<Alerta> resultados = new ArrayList<>();
-            resultados = meteoErcillaDAO.getResultadosBusqueda(query);
+            resultados = busquedasDAO.getResultadosBusqueda(query);
             defaultQuery();
             if(resultados.size()  >= 1) {
                 Intent intent = new Intent(this, ResultadosBusquedaActivity.class);

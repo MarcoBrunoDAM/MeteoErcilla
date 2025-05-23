@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.meteoercilla.adapters.ProvinciasAdapter;
 import com.example.meteoercilla.dao.MeteoErcillaDAO;
+import com.example.meteoercilla.dao.UsuariosDAO;
 import com.example.meteoercilla.models.Provincia;
 
 import java.sql.SQLException;
@@ -28,6 +29,7 @@ Button btn_editar;
 String correo = "";
 String telefono = "";
 MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
+UsuariosDAO usuariosDAO = new UsuariosDAO();
 ArrayList<String> provincias = new ArrayList<>();
 ArrayList<String> provinciasUsuario = new ArrayList<>();
 ArrayList<Provincia> provinciasSpinner = new ArrayList<>();
@@ -52,10 +54,10 @@ int idUsuario;
         tx_telefono = findViewById(R.id.tx_telefonoEditar);
         btn_editar = findViewById(R.id.btn_editarUsuario);
         try {
-            correo = meteoErcillaDAO.getCorreoById(idUsuario);
-            telefono = meteoErcillaDAO.getTelefonoById(idUsuario);
+            correo = usuariosDAO.getCorreoById(idUsuario);
+            telefono = usuariosDAO.getTelefonoById(idUsuario);
             provincias = meteoErcillaDAO.getProvincias();
-            provinciasUsuario = meteoErcillaDAO.getNombresProvinciaByID(idUsuario);
+            provinciasUsuario = usuariosDAO.getNombresProvinciaByID(idUsuario);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -94,9 +96,9 @@ int idUsuario;
         try {
             ArrayList<Integer> listaIdProvincia = meteoErcillaDAO.getListaIdProvincia(provinciasSeleccionadas);
             //Borrmaos los registros actuales y creamos los nuevos , hace la misma funcion que actualizar
-            meteoErcillaDAO.eliminarProvincias(idUsuario);
-            int okCorreo = meteoErcillaDAO.actualizarCorreo(correoEditar,idUsuario);
-            int okTelefono = meteoErcillaDAO.actualizarTelefono(telefonoEditar,idUsuario);
+            usuariosDAO.eliminarProvincias(idUsuario);
+            int okCorreo = usuariosDAO.actualizarCorreo(correoEditar,idUsuario);
+            int okTelefono = usuariosDAO.actualizarTelefono(telefonoEditar,idUsuario);
             if(okCorreo == 1){
                 Toast.makeText(this,"El correo al que quieres editar ya existe",Toast.LENGTH_SHORT).show();
                 return;
@@ -105,7 +107,7 @@ int idUsuario;
                 Toast.makeText(this,"El telefono al que quieres editar ya existe",Toast.LENGTH_SHORT).show();
                 return;
             }
-            boolean okProvincias = meteoErcillaDAO.registrarProvincias(listaIdProvincia,idUsuario);
+            boolean okProvincias = usuariosDAO.registrarProvincias(listaIdProvincia,idUsuario);
             if (okProvincias && okCorreo == 0 && okTelefono == 0){
                 Toast.makeText(this,"Usuario editado con exito",Toast.LENGTH_SHORT).show();
             }

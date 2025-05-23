@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.meteoercilla.adapters.ProvinciasAdapter;
 import com.example.meteoercilla.dao.MeteoErcillaDAO;
+import com.example.meteoercilla.dao.UsuariosDAO;
 import com.example.meteoercilla.models.Provincia;
 import com.example.meteoercilla.models.Usuario;
 
@@ -27,6 +28,7 @@ public class RegisterActivity extends AppCompatActivity {
     Button btn_registrarUsuario,btn_provincias;
     Spinner sp_provincias;
     MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
+    UsuariosDAO usuariosDAO = new UsuariosDAO();
     ArrayList<String> provincias = new ArrayList<>();
     ArrayList<Provincia> provinciasSpinner = new ArrayList<>();
 
@@ -88,14 +90,14 @@ public class RegisterActivity extends AppCompatActivity {
                     return;
                 }
                 ArrayList<Integer> listaIdProvincia = meteoErcillaDAO.getListaIdProvincia(provinciasSeleccionadas);
-                int okRegistro = meteoErcillaDAO.registroUsuario(usuario);
+                int okRegistro = usuariosDAO.registroUsuario(usuario);
 
                 if (okRegistro == 1){
                     Toast.makeText(this,R.string.registro_existe,Toast.LENGTH_SHORT).show();
                 }
                 else if (okRegistro == 0){
-                    int idUsuario = meteoErcillaDAO.getIdUsuario(correo);
-                    boolean okProvincias = meteoErcillaDAO.registrarProvincias(listaIdProvincia,idUsuario);
+                    int idUsuario = usuariosDAO.getIdUsuario(correo);
+                    boolean okProvincias = usuariosDAO.registrarProvincias(listaIdProvincia,idUsuario);
                     if (okProvincias){
                         Toast.makeText(this,R.string.registro_exito,Toast.LENGTH_SHORT).show();
                     }

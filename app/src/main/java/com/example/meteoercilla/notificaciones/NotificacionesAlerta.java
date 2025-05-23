@@ -11,6 +11,7 @@ import android.graphics.Color;
 import androidx.core.app.NotificationCompat;
 
 import com.example.meteoercilla.R;
+import com.example.meteoercilla.dao.AlertasDAO;
 import com.example.meteoercilla.dao.MeteoErcillaDAO;
 import com.example.meteoercilla.models.Alerta;
 
@@ -19,7 +20,7 @@ import java.sql.SQLException;
 public class NotificacionesAlerta extends BroadcastReceiver {
 
 String channelId = "alerta";
-MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
+AlertasDAO alertasDAO = new AlertasDAO();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -92,7 +93,7 @@ MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
             //de ser asi , no se repite la misma notificacion
             try {
                 if(idUsuario != 0) {
-                    meteoErcillaDAO.notificarAlerta(idUsuario, alerta.getIdAlerta());
+                    alertasDAO.notificarAlerta(idUsuario, alerta.getIdAlerta());
                 }
                 else{
                     //Al igual que a un usuario logeado le guardamos su alerta notificada

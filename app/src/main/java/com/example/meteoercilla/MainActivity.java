@@ -41,11 +41,9 @@ private LocationRequest locationRequest;
 private SettingsClient settingsClient;
 private Context context;
 private CheckUbicationService checkUbicationService;
-//Esta variable existe para evitar problemas de bucles a la hora de solicitar permisos
-int contadorPermisos = 0;
+int contadorPermisos = 0; //Esta variable existe para evitar problemas de bucles a la hora de solicitar permisos
 Button btn_login, btn_registrar;
-MeteoErcillaDAO meteoErcillaDAO = new MeteoErcillaDAO();
-//Estas 3 variables las usaremos para obtener la latitud y longitud de nuestra ubicacion
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
