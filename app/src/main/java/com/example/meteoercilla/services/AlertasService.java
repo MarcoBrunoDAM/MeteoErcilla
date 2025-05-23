@@ -40,7 +40,7 @@ Context context;
                     //Si no hay una ultimaUbicacion la id sera 0 , con lo cual al buscar en base de datos con
                     // la id 0 al no existir solo te va a devolver las alertas de las provincias que el usuario
                     //tenga registradas, esto en caso por ejemplo que la app no tenga permisos de ubicacion
-                    ArrayList<Integer> listaProvincias = alertasDAO.getIDsProvinciaByID(idUser);
+                    ArrayList<Integer> listaProvincias = alertasDAO.getIDsProvinciaByIdUsuario(idUser);
                     ArrayList<Alerta> alertas = alertasDAO.getAlertasServicio(listaProvincias, idUbicacion);
                     if (alertas.size() >= 1) {
                         for (Alerta a : alertas) {

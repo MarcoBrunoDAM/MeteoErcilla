@@ -132,7 +132,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="60dp"
         android:backgroundTint="#03A8FF"
-        android:onClick="editarProvincias"
+        android:onClick="editarUsuario"
         android:text="@string/editar"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"

@@ -40,10 +40,10 @@ public class TiposAlertaAdapter extends ArrayAdapter<TipoAlerta> {
             holder.tx_tipoAlerta.setText(tipoAlerta.getNombre());
             // Quitar listener temporalmente para evitar disparos no deseados
             holder.ck_tipoAlerta.setOnCheckedChangeListener(null);
-            holder.ck_tipoAlerta.setChecked(tipoAlerta.isSeleccionada());
+            holder.ck_tipoAlerta.setChecked(tipoAlerta.isSeleccionado());
             // Reasignar el listener
             holder.ck_tipoAlerta.setOnCheckedChangeListener((buttonView, isChecked) -> {
-                tipoAlerta.setSeleccionada(isChecked);
+                tipoAlerta.setSeleccionado(isChecked);
                 if (isChecked) {
                     Toast.makeText(getContext(), tipoAlerta.getNombre(), Toast.LENGTH_SHORT).show();
                 }

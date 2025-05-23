@@ -40,10 +40,10 @@ public class NivelesPeligroAdapter extends ArrayAdapter<NivelPeligro> {
             holder.tx_nivelPeligro.setText(nivelPeligro.getNombre());
             // Quitar listener temporalmente para evitar disparos no deseados
             holder.ck_nivelPeligro.setOnCheckedChangeListener(null);
-            holder.ck_nivelPeligro.setChecked(nivelPeligro.isSeleccionada());
+            holder.ck_nivelPeligro.setChecked(nivelPeligro.isSeleccionado());
             // Reasignar el listener
             holder.ck_nivelPeligro.setOnCheckedChangeListener((buttonView, isChecked) -> {
-               nivelPeligro.setSeleccionada(isChecked);
+               nivelPeligro.setSeleccionado(isChecked);
                 if (isChecked) {
                     Toast.makeText(getContext(), nivelPeligro.getNombre(), Toast.LENGTH_SHORT).show();
                 }

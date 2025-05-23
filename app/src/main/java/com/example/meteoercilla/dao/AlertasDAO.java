@@ -38,7 +38,7 @@ public class AlertasDAO {
     }
 
 
-    public ArrayList<Integer> getIDsProvinciaByID(int idUsuario) throws SQLException {
+    public ArrayList<Integer> getIDsProvinciaByIdUsuario(int idUsuario) throws SQLException {
         if(!initDBConnection()){
             throw new SQLException("Error al conectar a base de datos");
         }

@@ -39,7 +39,6 @@ public class MenuActivity extends AppCompatActivity {
     private LocationRequest locationRequest;
     private SettingsClient settingsClient;
     int contadorPermisos = 0;
-    private Context context;
     SharedPreferences sharedPreferences;
     private CheckUbicationService checkUbicationService;
     String ultimaUbicacion;
@@ -67,7 +66,7 @@ public class MenuActivity extends AppCompatActivity {
         btn_buscar = findViewById(R.id.btn_buscarActivity);
         btn_editar = findViewById(R.id.btn_editarDatos);
         btn_logout = findViewById(R.id.btn_logout);
-        chekActivatedUbication();
+        checkActivatedUbication();
     }
 
 
@@ -78,11 +77,11 @@ public class MenuActivity extends AppCompatActivity {
         //Solicitamos los permisos en caso de que no los tengamos al igual que en el main activity
         // en el caso que pasemos directamente al menu por el login automatico
         if(contadorPermisos == 0) {
-            UbicationPermission.UbicationPermission(this);
+            UbicationPermission.ubicationPermission(this);
             contadorPermisos++;
         }
         if (contadorPermisos <= 2) {
-            NotifyPermissions.NotifyPermission(this);
+            NotifyPermissions.notifyPermission(this);
             contadorPermisos++;
         }
     }
@@ -140,7 +139,7 @@ public class MenuActivity extends AppCompatActivity {
 
     //En este caso el servicio se ejecuta en la propia activity ya que necesita un dialogo
     // y eso no se puede hacer en una clase normal.
-    private void chekActivatedUbication() {
+    private void checkActivatedUbication() {
         LocationSettingsRequest locationSettingsRequest = new LocationSettingsRequest.Builder()
                 .addLocationRequest(locationRequest)
                 .setAlwaysShow(true)
@@ -160,10 +159,8 @@ public class MenuActivity extends AppCompatActivity {
                     ((ResolvableApiException) e)
                             .startResolutionForResult(this, REQUEST_CHECK_SETTINGS);
                 } catch (IntentSender.SendIntentException sendEx) {
-                    Toast.makeText(this, "No se pudo solicitar activar GPS", Toast.LENGTH_SHORT).show();
+
                 }
-            } else {
-                Toast.makeText(this, "Configuración de ubicación no satisfactoria", Toast.LENGTH_SHORT).show();
             }
         });
 

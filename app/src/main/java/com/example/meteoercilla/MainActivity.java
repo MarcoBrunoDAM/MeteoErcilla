@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
 private static final int REQUEST_CHECK_SETTINGS = 1001;
 private LocationRequest locationRequest;
 private SettingsClient settingsClient;
-private Context context;
 private CheckUbicationService checkUbicationService;
 int contadorPermisos = 0; //Esta variable existe para evitar problemas de bucles a la hora de solicitar permisos
 Button btn_login, btn_registrar;
@@ -70,6 +69,8 @@ Button btn_login, btn_registrar;
         }
         checkUbicationService = new CheckUbicationService(this);
         //Creamos lo necesario para el servicio en otra clase pero el servicio se ejecuta aqui
+        //Basicamente creamos un objeto de este servicio para poder usar y modificar las variables
+        // y usarlas aqui
         this.locationRequest = checkUbicationService.getLocationRequest();
         this.settingsClient = checkUbicationService.getSettingsClient();
         ejecutarServicioAlertas(this);
@@ -103,11 +104,11 @@ Button btn_login, btn_registrar;
         //Con esto evitamos que se formen bucles si le damos a NO PERMITIR
         //Solicitamos los permisos en caso de que no los tengamos
         if(contadorPermisos == 0) {
-            UbicationPermission.UbicationPermission(this);
+            UbicationPermission.ubicationPermission(this);
             contadorPermisos++;
         }
         if (contadorPermisos <= 2) {
-            NotifyPermissions.NotifyPermission(this);
+            NotifyPermissions.notifyPermission(this);
             contadorPermisos++;
         }
         }
@@ -186,10 +187,8 @@ Button btn_login, btn_registrar;
                     ((ResolvableApiException) e)
                             .startResolutionForResult(this, REQUEST_CHECK_SETTINGS);
                 } catch (IntentSender.SendIntentException sendEx) {
-                    Toast.makeText(this.context, "No se pudo solicitar activar GPS", Toast.LENGTH_SHORT).show();
+
                 }
-            } else {
-                Toast.makeText(this.context, "Configuración de ubicación no satisfactoria", Toast.LENGTH_SHORT).show();
             }
         });
 

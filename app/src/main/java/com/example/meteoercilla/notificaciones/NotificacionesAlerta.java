@@ -17,6 +17,8 @@ import com.example.meteoercilla.models.Alerta;
 
 import java.sql.SQLException;
 
+//Necesitamos que herede de BroadcastReceiver ya que necesitamos que reaccione a eventos del sistema
+//en este caso el servicio de alertas
 public class NotificacionesAlerta extends BroadcastReceiver {
 
 String channelId = "alerta";
@@ -97,7 +99,7 @@ AlertasDAO alertasDAO = new AlertasDAO();
                 }
                 else{
                     //Al igual que a un usuario logeado le guardamos su alerta notificada
-                    // en base de datos para que no se repita , al no estar logeado, no tenemos id
+                   // para que no se repita , al no estar logeado, no tenemos id
                     // por lo cual para que no se repita la misma notificacion aunque no estes logeado
                     //guardamos la id de la alerta en el propio SharedPreferences
                     SharedPreferences sharedPreferences = context.getSharedPreferences("Alertas", Context.MODE_PRIVATE);

@@ -85,7 +85,7 @@ int idUsuario;
     }
 
 
-    public void editarProvincias(View view){
+    public void editarUsuario(View view){
         ArrayList<String> provinciasSeleccionadas = getProvoncias();
         correoEditar = tx_correo.getText().toString();
         telefonoEditar = tx_telefono.getText().toString();

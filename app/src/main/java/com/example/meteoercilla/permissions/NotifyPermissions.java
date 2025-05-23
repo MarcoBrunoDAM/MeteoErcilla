@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 public class NotifyPermissions {
     //ESTE METODO COMPRUEBA SI TIENES LOS PERMISOS O NO
     //Y EN CASO DE NO TENERLOS LOS SOLICITA
-    public static void NotifyPermission(Context context){
+    public static void notifyPermission(Context context){
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) { // API 33 (Android 13)
             if (ContextCompat.checkSelfPermission(context, android.Manifest.permission.POST_NOTIFICATIONS)
                     != PackageManager.PERMISSION_GRANTED) {

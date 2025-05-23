@@ -414,7 +414,7 @@ try{
                     break;
 
             }
-            if (nivelPeligro.isSeleccionada()) {
+            if (nivelPeligro.isSeleccionado()) {
                nivelesPeligroSeleccionados.add(nivelTraducir);
             }
         }
@@ -472,7 +472,7 @@ try{
                     tipoAlertaTraducir = "Granizo";
                     break;
             }
-            if (tipoAlerta.isSeleccionada()) {
+            if (tipoAlerta.isSeleccionado()) {
                 tiposAlertaSeleccionados.add(tipoAlertaTraducir);
             }
         }

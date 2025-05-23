@@ -2,11 +2,11 @@ package com.example.meteoercilla.models;
 
 public class NivelPeligro {
     private String nombre;
-    private boolean seleccionada;
+    private boolean seleccionado;
 
     public NivelPeligro(String nombre, boolean seleccionada) {
         this.nombre = nombre;
-        this.seleccionada = seleccionada;
+        this.seleccionado = seleccionada;
     }
 
     public String getNombre() {
@@ -17,11 +17,11 @@ public class NivelPeligro {
         this.nombre = nombre;
     }
 
-    public boolean isSeleccionada() {
-        return seleccionada;
+    public boolean isSeleccionado() {
+        return seleccionado;
     }
 
-    public void setSeleccionada(boolean seleccionada) {
-        this.seleccionada = seleccionada;
+    public void setSeleccionado(boolean seleccionado) {
+        this.seleccionado = seleccionado;
     }
 }
