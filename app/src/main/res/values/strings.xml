@@ -18,6 +18,7 @@
     <string name="iniciar_sesion">INICIAR SESION</string>
     <string name="busqueda_fechas">Rango de fechas</string>
     <string name="busqueda_sin_resultados">No hay ningun resultado con esta busqueda</string>
+    <string name="resultados_busqueda">RESULTADOS DE LA BUSQUEDA</string>
     <string name="desde">Desde</string>
     <string name="hasta">Hasta</string>
     <string name="busqueda_provincias">Provincias</string>

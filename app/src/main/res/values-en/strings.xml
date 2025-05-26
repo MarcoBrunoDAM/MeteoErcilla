@@ -19,6 +19,7 @@
     <string name="iniciar_sesion">LOGIN</string>
     <string name="busqueda_fechas">Date range</string>
     <string name="busqueda_sin_resultados">There aren´t any results in this search</string>
+    <string name="resultados_busqueda">SEARCH RESULTS</string>
     <string name="desde">From</string>
     <string name="hasta">To</string>
     <string name="busqueda_provincias">Provinces</string>
